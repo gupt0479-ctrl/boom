@@ -60,7 +60,7 @@ pub fn load_dotenv() {
     debug!("No .env file found, using system environment variables only");
 }
 
-#[instrument(err, fields(path = %filepath))]
+#[instrument(err)]
 pub fn load_raw_config(filepath: &str) -> Result<Config, BoomConfigError> {
     let path = Path::new(filepath);
 
