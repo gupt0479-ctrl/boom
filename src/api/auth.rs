@@ -7,7 +7,6 @@ use actix_web::middleware::Next;
 use actix_web::{web, Error, HttpMessage};
 use jsonwebtoken::{decode, encode, Algorithm, DecodingKey, EncodingKey, Header, Validation};
 use mongodb::bson::doc;
-use mongodb::Database;
 use serde::{Deserialize, Serialize};
 use tracing::{debug, error, info};
 
@@ -28,9 +27,12 @@ pub struct AuthProvider {
 }
 
 impl AuthProvider {
-    pub async fn new(config: &AuthConfig, db: &mongodb::Database) -> Result<Self, std::io::Error> {
-        let encoding_key = EncodingKey::from_secret(config.secret_key.as_bytes());
-        let decoding_key = DecodingKey::from_secret(config.secret_key.as_bytes());
+    pub async fn new(
+        auth_config: &AuthConfig,
+        db: &mongodb::Database,
+    ) -> Result<Self, std::io::Error> {
+        let encoding_key = EncodingKey::from_secret(auth_config.secret_key.as_bytes());
+        let decoding_key = DecodingKey::from_secret(auth_config.secret_key.as_bytes());
         let mut validation = Validation::new(Algorithm::HS256);
         validation.validate_exp = config.token_expiration > 0; // Set to true if tokens should expire
 
