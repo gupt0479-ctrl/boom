@@ -509,4 +509,12 @@ impl LsstEnrichmentWorker {
             multisurvey_photstats,
         })
     }
+
+    #[cfg(any(test, feature = "test-utils"))]
+    pub async fn get_alert_properties_for_test(
+        &self,
+        alert: &LsstAlertForEnrichment,
+    ) -> Result<LsstAlertProperties, EnrichmentWorkerError> {
+        self.get_alert_properties(alert).await
+    }
 }

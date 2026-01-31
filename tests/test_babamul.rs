@@ -213,7 +213,7 @@ async fn create_mock_enriched_lsst_alert_with_matches(
     };
 
     let properties = enrichment_worker
-        .get_alert_properties(&lsst_alert_for_enrichment)
+        .get_alert_properties_for_test(&lsst_alert_for_enrichment)
         .await
         .unwrap();
 

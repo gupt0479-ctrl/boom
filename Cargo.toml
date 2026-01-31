@@ -67,5 +67,8 @@ ort = { version = "=2.0.0-rc.10", features = ["coreml"] }
 [target.'cfg(target_os = "linux")'.dependencies]
 ort = { version = "=2.0.0-rc.10", features = ["cuda"] }
 
+[features]
+test-utils = []
+
 [workspace]
 members = ["apache-avro-macros"]
